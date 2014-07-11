@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Deck of card:</strong>
+  <%= @card_in_deck.deck_of_card_id %>
+</p>
+
+<p>
+  <strong>Card:</strong>
+  <%= @card_in_deck.card_id %>
+</p>
+
+<p>
+  <strong>Order:</strong>
+  <%= @card_in_deck.order %>
+</p>
+
+<%= link_to 'Edit', edit_card_in_deck_path(@card_in_deck) %> |
+<%= link_to 'Back', card_in_decks_path %>

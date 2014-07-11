@@ -1,0 +1,32 @@
+<%= form_for(@card_in_deck) do |f| %>
+  <% if @card_in_deck.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@card_in_deck.errors.count, "error") %> prohibited this card_in_deck from being saved:</h2>
+
+      <ul>
+      <% @card_in_deck.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.hidden_field :deck_of_card_id, :value => @card_in_deck.deck_of_card_id %>
+  </div>
+  <div class="field">
+    <%= f.label :display_name %><br>
+    <%= f.text_field :display_name %>
+  </div>
+  <div class=field">
+    <%= f.label :suit %><br>
+    <%= f.text_field :suit %>
+  </div>
+  <div class="field">
+    <%= f.label :order %><br>
+    <%= f.number_field :order %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Deck</h1>
+
+<p><%= @deck_of_card.id =%>
+
+<h2>Actions<h2>
+
+<ul>
+  <li><%= link_to 'Add Card', new_card_in_deck_path(:deck_of_card_id => @deck_of_card.id) %></li>
+</ul>
+
+<h2>Cards</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Order</th>
+      <th>Display name</th>
+      <th>Suit</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @deck_of_card.card_in_decks.each do |card_in_deck| %>
+      <tr>
+        <td><%= card_in_deck.order %></td>
+        <td><%= card_in_deck.card.display_name %></td>
+        <td><%= card_in_deck.card.suit %></td>
+        <td><%= link_to 'Show', card_in_deck.card %></td>
+        <td><%= link_to 'Edit', edit_card_path(card_in_deck.card) %></td>
+        <td><%= link_to 'Destroy', card_in_deck.card, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Edit', edit_deck_of_card_path(@deck_of_card) %> |
+<%= link_to 'Back', deck_of_cards_path %>

@@ -1,0 +1,14 @@
+deck_of_cards
+  id: integer
+
+card_in_decks
+  id: integer 
+  deck_of_card_id: integer
+  card_id: integer
+  order: integer
+
+cards
+  id: integer
+  number: integer
+  display_name: string
+  suit: string

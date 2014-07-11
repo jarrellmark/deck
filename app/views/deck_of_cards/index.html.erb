@@ -1,0 +1,23 @@
+<h1>Listing deck_of_cards</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @deck_of_cards.each do |deck_of_card| %>
+      <tr>
+        <td><%= link_to 'Show', deck_of_card %></td>
+        <td><%= link_to 'Edit', edit_deck_of_card_path(deck_of_card) %></td>
+        <td><%= link_to 'Destroy', deck_of_card, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Deck of card', new_deck_of_card_path %>
