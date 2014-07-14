@@ -1,5 +1,5 @@
 class DeckOfCardsController < ApplicationController
-  before_action :set_deck_of_card, only: [:show, :edit, :update, :destroy]
+  before_action :set_deck_of_card, only: [:show, :edit, :update, :destroy, :shuffle, :add_all_cards]
 
   # GET /deck_of_cards
   # GET /deck_of_cards.json
@@ -10,6 +10,28 @@ class DeckOfCardsController < ApplicationController
   # GET /deck_of_cards/1
   # GET /deck_of_cards/1.json
   def show
+  end
+
+  # GET /deck_of_cards/1/shuffle
+  def shuffle
+    respond_to do |format|
+      if @deck_of_card.shuffle
+        format.html { redirect_to @deck_of_card, notice: 'Deck shuffled' }
+      else
+        format.html { redirect_to @deck_of_card, notice: 'Deck shuffle fail' }
+      end
+    end
+  end
+
+  # GET /deck_of_cards/1/add_all_cards
+  def add_all_cards
+    respond_to do |format|
+      if @deck_of_card.add_all_cards
+        format.html { redirect_to @deck_of_card, notice: 'All cards added' }
+      else
+        format.html { redirect_to @deck_of_card, notice: 'Cards adding fail.' }
+      end
+    end
   end
 
   # GET /deck_of_cards/new

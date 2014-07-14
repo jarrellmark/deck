@@ -1,4 +1,12 @@
-<h1>Listing cards</h1>
+<h1>Cards</h1>
+
+<h2>Actions</h2>
+
+<ul>
+  <li><%= link_to 'Add All Cards', make_all_cards_card_path(:id => @cards.first.id) %>
+</ul>
+
+<h2>Listing cards</h2>
 
 <table>
   <thead>

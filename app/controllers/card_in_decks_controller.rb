@@ -25,15 +25,22 @@ class CardInDecksController < ApplicationController
   # POST /card_in_decks.json
   def create
     @card = Card.where(:display_name => card_in_deck_params[:display_name], :suit => card_in_deck_params[:suit])[0]
-    @card_in_deck = CardInDeck.new(card_in_deck_params.merge(:card_id => @card.id))
+    if @card.present?
+      @card_in_deck = CardInDeck.new(card_in_deck_params.merge(:card_id => @card.id))
 
-    respond_to do |format|
-      if @card_in_deck.save
-        format.html { redirect_to @card_in_deck, notice: 'Card in deck was successfully created.' }
-        format.json { render :show, status: :created, location: @card_in_deck }
-      else
-        format.html { render :new }
-        format.json { render json: @card_in_deck.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @card_in_deck.save
+          format.html { redirect_to @card_in_deck, notice: 'Card in deck was successfully created.' }
+          format.json { render :show, status: :created, location: @card_in_deck }
+        else
+          format.html { render :new }
+          format.json { render json: @card_in_deck.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      @card_in_deck = CardInDeck.new(card_in_deck_params.merge(:card_id => -1))
+      respond_to do |format|
+        format.html { render :new, notice: 'Invalid card.' }
       end
     end
   end
@@ -42,9 +49,6 @@ class CardInDecksController < ApplicationController
   # PATCH/PUT /card_in_decks/1.json
   def update
     respond_to do |format|
-      #card = Card.where(:display_name => card_in_deck_params[:display_name], :suit => card_in_deck_params[:suit])
-      #card_in_deck_params[:card_id] = card.id
-      #card_in_deck_params[:card_id] = 5
       if @card_in_deck.update(card_in_deck_params)
         format.html { redirect_to @card_in_deck, notice: 'Card in deck was successfully updated.' }
         format.json { render :show, status: :ok, location: @card_in_deck }
@@ -60,7 +64,7 @@ class CardInDecksController < ApplicationController
   def destroy
     @card_in_deck.destroy
     respond_to do |format|
-      format.html { redirect_to card_in_decks_url, notice: 'Card in deck was successfully destroyed.' }
+      format.html { redirect_to @card_in_deck.deck_of_card, notice: 'Card in deck was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -73,6 +77,6 @@ class CardInDecksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def card_in_deck_params
-      params.require(:card_in_deck).permit(:deck_of_card_id, :card_id, :order)
+      params.require(:card_in_deck).permit(:deck_of_card_id, :card_id, :order, :display_name, :suit)
     end
 end

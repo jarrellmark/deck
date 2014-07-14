@@ -1,11 +1,20 @@
 Rails.application.routes.draw do
-  resources :cards
+  resources :cards do
+    member do
+      get 'make_all_cards'
+    end
+  end
 
   resources :card_in_decks
 
   get 'welcome/index'
 
-  resources :deck_of_cards
+  resources :deck_of_cards do
+    member do
+      get 'shuffle'
+      get 'add_all_cards'
+    end
+  end
 
   root 'welcome#index'
 

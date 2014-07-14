@@ -8,6 +8,8 @@
 
 <ul>
   <li><%= link_to 'Add Card', new_card_in_deck_path(:deck_of_card_id => @deck_of_card.id) %></li>
+  <li><%= link_to 'Add All Cards', add_all_cards_deck_of_card_path(:deck_of_card_id => @deck_of_card.id) %>
+  <li><%= link_to 'Shuffle', shuffle_deck_of_card_path(:deck_of_card_id => @deck_of_card.id) %></li>
 </ul>
 
 <h2>Cards</h2>
@@ -28,9 +30,9 @@
         <td><%= card_in_deck.order %></td>
         <td><%= card_in_deck.card.display_name %></td>
         <td><%= card_in_deck.card.suit %></td>
-        <td><%= link_to 'Show', card_in_deck.card %></td>
-        <td><%= link_to 'Edit', edit_card_path(card_in_deck.card) %></td>
-        <td><%= link_to 'Destroy', card_in_deck.card, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', card_in_deck %></td>
+        <td><%= link_to 'Edit', edit_card_in_deck_path(card_in_deck) %></td>
+        <td><%= link_to 'Destroy', card_in_deck, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

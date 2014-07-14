@@ -1,5 +1,5 @@
 class CardsController < ApplicationController
-  before_action :set_card, only: [:show, :edit, :update, :destroy]
+  before_action :set_card, only: [:show, :edit, :update, :destroy, :make_all_cards]
 
   # GET /cards
   # GET /cards.json
@@ -10,6 +10,19 @@ class CardsController < ApplicationController
   # GET /cards/1
   # GET /cards/1.json
   def show
+  end
+
+  # GET /cards/1/make_all_cards
+  def make_all_cards
+    respond_to do |format|
+      if @card.make_all_cards
+        format.html { redirect_to cards_url, notice: 'Card was successfully created.' }
+        format.json { render :show, status: :created, location: @card }
+      else
+        format.html { redirect_to cards_url }
+        format.json { render json: @card.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # GET /cards/new
@@ -69,6 +82,6 @@ class CardsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def card_params
-      params.require(:card).permit(:number, :display_name, :suit)
+      params.require(:card).permit(:display_name, :suit)
     end
 end
